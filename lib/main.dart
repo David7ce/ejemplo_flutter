@@ -11,17 +11,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Generador de nombres en inglés',
-        theme: ThemeData (
-          primarySwatch: Colors.deepPurple,
-        ),
-        home: Scaffold(
-            appBar: AppBar(title: const Text("Generador de nombres en inglés")),
-            body: const Center(child: RandomWords())
-        )
-      );
+        home: RandomWords(),
+    );
   }
 }
 
@@ -30,9 +24,19 @@ class _RandomWordsState extends State<RandomWords> {
   final saved = <WordPair>[];
   final biggerFont = const TextStyle(fontSize: 18);
 
+  void _pushSaved() {}
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Generador de nombres"),
+        actions: [
+          IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved, tooltip: "Ver palabras guardadas")
+        ],
+      ),
+      body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemBuilder: (context, i) {
           if (i.isOdd) return const Divider();
@@ -65,7 +69,8 @@ class _RandomWordsState extends State<RandomWords> {
                   }
                 });
               }));
-        });
+        })
+    );
   }
 }
 
