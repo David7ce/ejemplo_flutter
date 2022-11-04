@@ -24,7 +24,24 @@ class _RandomWordsState extends State<RandomWords> {
   final saved = <WordPair>[];
   final biggerFont = const TextStyle(fontSize: 18);
 
-  void _pushSaved() {}
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void> (
+        builder:(context) {
+          final tiles = saved.map(
+            (pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: biggerFont,
+                )
+              )
+            }
+          )
+        },
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
